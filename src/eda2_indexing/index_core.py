@@ -20,6 +20,14 @@ def build_composite_key(status: str | None, category: str | None, location: str 
     return (_normalize(status), _normalize(category), _normalize(location))
 
 
+def _probe_value(item: ItemRecord, order_by: str) -> str:
+    if order_by == "barcode":
+        return item.barcode
+    if order_by == "found_lost_date":
+        return item.found_lost_date
+    raise ValueError("order_by must be 'barcode' or 'found_lost_date'")
+
+
 def build_primary_index(records: list[ItemRecord], order_by: str = "barcode") -> PrimarySequentialIndex:
     if order_by not in {"barcode", "found_lost_date"}:
         raise ValueError("order_by must be 'barcode' or 'found_lost_date'")
@@ -35,26 +43,20 @@ def build_primary_index(records: list[ItemRecord], order_by: str = "barcode") ->
             block.sort(key=lambda item: (item.barcode, item.found_lost_date, item.item_id))
         else:
             block.sort(key=lambda item: (item.found_lost_date, item.barcode, item.item_id))
-        blocks[key] = block
 
     return PrimarySequentialIndex(order_by=order_by, blocks=blocks)
-
-
-def _probe_value(item: ItemRecord, order_by: str) -> str:
-    if order_by == "barcode":
-        return item.barcode
-    return item.found_lost_date
 
 
 def binary_search_block(block: list[ItemRecord], target: str, order_by: str) -> list[ItemRecord]:
     if not block:
         return []
 
-    probe = [_probe_value(item, order_by) for item in block]
+    if order_by not in {"barcode", "found_lost_date"}:
+        raise ValueError("order_by must be 'barcode' or 'found_lost_date'")
 
-    left = bisect_left(probe, target)
-    right = bisect_right(probe, target)
+    key_fn = lambda item: _probe_value(item, order_by)
 
-    if left == right:
-        return []
+    left = bisect_left(block, target, key=key_fn)
+    right = bisect_right(block, target, key=key_fn)
+
     return block[left:right]
