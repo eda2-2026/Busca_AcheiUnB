@@ -1,0 +1,113 @@
+{
+  "benchmark": "eda2_sequential_vs_indexed",
+  "started_at": "2026-04-03T18:57:00.634350",
+  "dataset_csv": "data/items_benchmark.csv",
+  "dataset_size": 5000,
+  "warmup": 5,
+  "iterations": 30,
+  "order_by": "barcode",
+  "results": [
+    {
+      "algorithm": "sequential",
+      "scenario": "key_only_block_scan",
+      "query_params": {
+        "status": "found",
+        "category": "eletronicos",
+        "location": "biblioteca"
+      },
+      "result_count": 1052,
+      "avg_ms": 0.9624284666666667,
+      "p50_ms": 0.951503,
+      "p95_ms": 1.059836,
+      "min_ms": 0.895664,
+      "max_ms": 1.121734,
+      "runs": 30
+    },
+    {
+      "algorithm": "indexed",
+      "scenario": "key_only_block_scan",
+      "query_params": {
+        "status": "found",
+        "category": "eletronicos",
+        "location": "biblioteca"
+      },
+      "result_count": 1052,
+      "avg_ms": 0.3152474333333333,
+      "p50_ms": 0.311259,
+      "p95_ms": 0.345859,
+      "min_ms": 0.299482,
+      "max_ms": 0.360277,
+      "runs": 30
+    },
+    {
+      "algorithm": "sequential",
+      "scenario": "key_plus_barcode",
+      "query_params": {
+        "status": "found",
+        "category": "eletronicos",
+        "location": "biblioteca",
+        "barcode": "01000001"
+      },
+      "result_count": 1,
+      "avg_ms": 0.9368283000000001,
+      "p50_ms": 0.927026,
+      "p95_ms": 0.98638,
+      "min_ms": 0.894329,
+      "max_ms": 1.008625,
+      "runs": 30
+    },
+    {
+      "algorithm": "indexed",
+      "scenario": "key_plus_barcode",
+      "query_params": {
+        "status": "found",
+        "category": "eletronicos",
+        "location": "biblioteca",
+        "barcode": "01000001"
+      },
+      "result_count": 1,
+      "avg_ms": 0.032226366666666666,
+      "p50_ms": 0.031773,
+      "p95_ms": 0.03292,
+      "min_ms": 0.030525,
+      "max_ms": 0.046259,
+      "runs": 30
+    },
+    {
+      "algorithm": "sequential",
+      "scenario": "key_plus_name_filter",
+      "query_params": {
+        "status": "found",
+        "category": "eletronicos",
+        "location": "biblioteca",
+        "name_contains": "target"
+      },
+      "result_count": 1000,
+      "avg_ms": 1.0536286666666668,
+      "p50_ms": 1.038226,
+      "p95_ms": 1.142699,
+      "min_ms": 1.001613,
+      "max_ms": 1.177911,
+      "runs": 30
+    },
+    {
+      "algorithm": "indexed",
+      "scenario": "key_plus_name_filter",
+      "query_params": {
+        "status": "found",
+        "category": "eletronicos",
+        "location": "biblioteca",
+        "name_contains": "target"
+      },
+      "result_count": 1000,
+      "avg_ms": 0.3896575666666667,
+      "p50_ms": 0.386105,
+      "p95_ms": 0.412142,
+      "min_ms": 0.36824,
+      "max_ms": 0.432103,
+      "runs": 30
+    }
+  ],
+  "index_build_ms": 2.746261,
+  "finished_at": "2026-04-03T18:57:00.766331"
+}
