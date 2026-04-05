@@ -72,21 +72,25 @@ Esse fluxo e o que melhor representa o objetivo do trabalho, pois evidencia o ga
 - --mode indexed: referencia "depois" (indice + bloco + binaria/fallback)
 - --mode both: gera comparacao direta no mesmo arquivo
 
-### Comparacao de evolucao (print)
+### Comparacao de evolucao
 
-Exemplo de resultado com 5000 itens, seed 42, 30 iteracoes:
+![image](docs/assets/image.png)
+Resultado atual medido no projeto AcheiUnB (registros reais):
 
-| Cenario | Sequential avg (ms) | Indexed avg (ms) | Ganho (x) |
+- dataset analisado: 12000 registros validos
+- chave base do benchmark: status=found, category=10, location=8
+- testes de nucleo executados: 6 testes, status OK
+
+| Cenario (descricao intuitiva) | Sequential avg (ms) | Indexed avg (ms) | Ganho (x) |
 | --- | ---: | ---: | ---: |
-| key_only_block_scan | 0.9010 | 0.3075 | 2.93x |
-| key_plus_barcode | 0.8795 | 0.0032 | 278.37x |
-| key_plus_name_filter | 0.9760 | 0.3695 | 2.64x |
+| Busca por chave composta (key_only_block_scan) | 4.2593 | 2.3160 | 1.84x |
+| Busca por chave composta + barcode exato (key_plus_barcode) | 4.4982 | 0.4905 | 9.17x |
 
-```text
-[evolucao] key_only_block_scan      0.9010 ms -> 0.3075 ms   (2.93x)
-[evolucao] key_plus_barcode         0.8795 ms -> 0.0032 ms (278.37x)
-[evolucao] key_plus_name_filter     0.9760 ms -> 0.3695 ms   (2.64x)
-```
+Leitura rapida dos cenarios:
+
+- Busca por chave composta: filtra por status + categoria + local e analisa o bloco resultante.
+- Busca por chave composta + barcode exato: aplica o mesmo filtro base e faz busca direta pelo barcode dentro do bloco.
+
 
 ## Outros
 Este repositório não representa o projeto AcheiUnB em si, mas sim o núcleo desacoplado desenvolvido para a disciplina de Estruturas de Dados 2. Sua função é concentrar a implementação da estrutura de busca e indexação de forma separada, facilitando testes, análise e evolução da solução. A integração desse núcleo ao fluxo real do AcheiUnB já foi realizada no repositório do projeto através do seguinte Pull Request:
