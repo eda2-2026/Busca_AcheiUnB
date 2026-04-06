@@ -9,6 +9,9 @@
 | 23/1011220  |  Davi Camilo Menezes |
 | 23/1026714  |  Euller Júlio da Silva |
 
+## Apresentação do trabalho
+[Link para o vídeo de apresentação](https://youtu.be/94PtfBDGwHg?si=EQmHE9qDnq7x-14V)
+
 ## Sobre
 O [AcheiUnB](https://github.com/unb-mds/2024-2-AcheiUnB) é um projeto criado para facilitar a busca e a recuperação de itens perdidos na Universidade de Brasília, permitindo que estudantes cadastrem objetos, perdidos ou encontrados, em uma plataforma mais organizada e acessível do que grupos de mensagens informais.
 
