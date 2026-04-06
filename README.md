@@ -39,11 +39,17 @@ Leitura rápida dos cenários:
 - Busca por chave composta: filtra por status + categoria + local e analisa o bloco resultante.
 - Busca por chave composta + barcode exato: aplica o mesmo filtro base e faz busca direta pelo barcode dentro do bloco.
 
-### Execução local do trabalho
+### Execução local do trabalho de EDA2
 
 ![execucaolocal](docs/assets/execucaolocal.png)
 
 Ao fim, tem-se a validação com os testes automatizados, os quais foram concluídos com sucesso.
+
+### Execução local do projeto alvo (AcheiUnB)
+
+![integracao](docs/assets/integracao.png)
+
+Após a integração do algoritmo de estruturas de dados com o AcheiUnB, foram realizados os testes no arquivos `test_index_core` e `test_search_engines`, todos aprovados.
 
 ## Instalação
 **Linguagem**: Python<br>
